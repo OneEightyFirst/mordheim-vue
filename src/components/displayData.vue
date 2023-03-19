@@ -54,10 +54,10 @@
                       </div>
                       <div class="row text-center w-100 mx-auto">
                         <div class="col border-right">
-                          <p class="text-red">{{ warrior.stats.M[0] }}"</p>
+                          <p>{{ warrior.stats.M[0] }}"</p>
                         </div>
                         <div class="col border-right">
-                          <p class="text-green">{{ warrior.stats.WS[0] }}</p>
+                          <p>{{ warrior.stats.WS[0] }}</p>
                         </div>
                         <div class="col border-right">
                           <p>{{ warrior.stats.BS[0] }}</p>
@@ -86,12 +86,41 @@
                       </div>
                     </div>
                     <div class="container">
-                      <div class="row">
+                      <div v-if="!!warrior.special_rules" class="row">
                         <div class="col px-3">
                           <h4 class="text-uppercase">Special Rules</h4>
-                          <p class="pb-3"><strong>Leader: </strong>Any warrior within 6" of the Questing Knight may use his Leadership characteristic when taking Leadership tests.</p>
-                          <p class="pb-3"><strong>Knights Virtue: </strong>A Questing Knight is a chivalrous warrior who is superior to ordinary warriors. He will never panic and break from combat and so does not have to pass a Leadership test for being all alone.</p>
+                          <p v-for="(rule, index) in warrior.special_rules.rule" :key="index">
+                            <strong>{{ rule.title }}:</strong> {{ rule.description }}
+                          </p>
+                        </div>
+                      </div>                   
+                      <div class="row">
+                        <div class="col px-3">
                           <h4 class="text-uppercase">Equipment</h4>
+                          <div v-if="warrior.equipment.weapon">
+                            <p v-for="(weapon, index) in warrior.equipment.weapon" :key="index + 1">
+                              {{ weapon.name }} | {{ weapon.range }} | {{ weapon.strength }}<br />
+                              <strong>{{ weapon.rule[0].title }}:</strong> {{ weapon.rule[0].description }}
+                              <button tabindex="0" class="btn btn-secondary mr-1 mb-2" type="button" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="`${weapon.name} | ${weapon.range} | ${weapon.strength}<br /><strong>${weapon.rule[0].title}:</strong> ${weapon.rule[0].description}`">
+                                {{ weapon.name }}
+                              </button>
+
+                            </p>
+                         
+                          </div>
+                          <div v-if="warrior.equipment.armour">
+                            <p v-for="(armour, index) in warrior.equipment.armour" :key="index + 1">
+                              {{ armour.name }}<br />
+                              <strong>{{ armour.rule[0].title }}:</strong> {{ armour.rule[0].description }}
+                            </p>
+                          </div>
+                          <div v-if="warrior.equipment.misc">
+                            <p v-for="(misc, index) in warrior.equipment.misc" :key="index + 1">
+                              {{ misc.name }}<br />
+                              {{ misc.description }}
+                            </p>
+                          </div>
+
                           <span tabindex="0" class="btn btn-secondary mr-1 mb-2" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="top" data-title="" data-content="
                             <h4 class='text-center font-size-18'>Sword | Close Combat | As User</h4>
                             <p class='pb-1'><strong>Parry:</strong>Swords offer an excellent balance of defence and offence. A model armed with a sword may parry blows. When his opponent rolls to hit, the model armed with a sword may roll a D6. If the score is greater than the highest to hit score of his opponent, the model has parried the blow, and that attack is discarded. A model may not parry attacks made with double or more its own Strength – they are simply too powerful to be stopped.</p>
@@ -132,14 +161,15 @@ export default {
   computed: {
     warriors() {
       const data = JSON.parse(localStorage.getItem('myData'));
-      return data.warband.warrior;
+      return data.warriors;
     },
   },
 
   methods: {
     clearData() {
       localStorage.removeItem('myData');
-    }
+    },
   }
 }
+
 </script>

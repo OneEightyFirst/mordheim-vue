@@ -1,16 +1,13 @@
 <template>
   <div>
     <input type="file" @change="handleFileUpload">
-    <button @click="uploadData">Upload</button>
-    <div v-if="isUploaded">
+    <button v-if="isUploaded">
       <router-link to="/display-data">View Data</router-link>
-    </div>
+    </button>
   </div>
 </template>
 
 <script>
-import { parseString } from 'xml2js';
-
 export default {
   data() {
     return {
@@ -22,20 +19,14 @@ export default {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = () => {
-        const xmlString = reader.result;
-        parseString(xmlString, { explicitArray: false }, (err, result) => {
-        if (err) {
-          console.error(err);
-        } else {
-          try {
-            const jsonData = JSON.stringify(result);
-            localStorage.setItem('myData', jsonData);
-            this.isUploaded = true;
-          } catch (e) {
-            console.error(e);
-          }
+        const jsonString = reader.result;
+        try {
+          const jsonData = JSON.parse(jsonString);
+          localStorage.setItem('myData', JSON.stringify(jsonData));
+          this.isUploaded = true;
+        } catch (e) {
+          console.error(e);
         }
-      });
       };
       reader.readAsText(file);
     },

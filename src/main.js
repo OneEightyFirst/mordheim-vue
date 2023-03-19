@@ -1,19 +1,15 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import { createPopper } from '@popperjs/core';
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.js";
+import { createVuetify } from 'vuetify';
+
+import 'vuetify/dist/vuetify.css';
 
 const app = createApp(App);
 
+const vuetify = createVuetify();
+
 app.use(router);
+app.use(vuetify);
 
-// Call createPopper in the mounted hook of the App component
-app.mounted = function() {
-  const button = document.querySelector('#button');
-  const tooltip = document.querySelector('#tooltip');
-  createPopper(button, tooltip);
-}
-
-app.mount("#app");
+app.mount('#app');
