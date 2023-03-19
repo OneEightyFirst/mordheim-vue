@@ -1,4 +1,3 @@
-@import '../node_modules/bootstrap/scss/bootstrap';
 
 @import url(https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap);.col,.container {
   padding: 0 var(--ifm-spacing-horizontal);
@@ -26,35 +25,35 @@ body {
   }
 
 
-// Red
-$red:     red;
-$green: 		green;
-$teal: 		#00586d;
-$theme-colors: (
-    'red': 							$red,
-    'green': 						$green,
-    'teal': 						$teal,
-    'primary': 						$red,
-    // 'secondary': 					$blue
-);
-@each $color, $value in $theme-colors {
-  .text-#{$color} {
-      color: $value;
-  }
-}
-$font-sizes: (12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48);
+// // Red
+// $red:     red;
+// $green: 		green;
+// $teal: 		#00586d;
+// $theme-colors: (
+//     'red': 							$red,
+//     'green': 						$green,
+//     'teal': 						$teal,
+//     'primary': 						$red,
+//     // 'secondary': 					$blue
+// );
+// @each $color, $value in $theme-colors {
+//   .text-#{$color} {
+//       color: $value;
+//   }
+// }
+// $font-sizes: (12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48);
 
-@each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+// @each $breakpoint in map-keys($grid-breakpoints) {
+//     @include media-breakpoint-up($breakpoint) {
+//         $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-        @each $size in $font-sizes {
-            .font-size#{$infix}-#{$size} {
-                font-size: $size + px !important;
-            }
-        }
-    }
-}
+//         @each $size in $font-sizes {
+//             .font-size#{$infix}-#{$size} {
+//                 font-size: $size + px !important;
+//             }
+//         }
+//     }
+// }
 
 
 
@@ -72,4 +71,10 @@ body {
 p {
   margin:0;
   line-height: 1.1em;
+}
+
+
+//Fix tooltip background
+.v-tooltip .v-overlay__content {
+  background: rgba(var(--v-theme-surface-variant), 1) !important;
 }

@@ -1,0 +1,170 @@
+{
+ "warriors": [
+    {
+       "name": "Sir Pellinore",
+       "title": "Questing knight",
+       "stats": {
+          "M": "3",
+          "WS": "5",
+          "BS": "3",
+          "S": "4",
+          "T": "3",
+          "W": "1",
+          "I": "4",
+          "A": "1",
+          "Ld": "8",
+          "Sv": "4+"
+       },
+       "special_rules": {
+          "rule": [
+              {
+                "title": "Knights Virtue",
+                "description": "A Questing Knight is a chivalrous warrior who is superior to ordinary warriors. He will never panic and break from combat and so does not have to pass a Leadership test for being all alone."
+              },
+              {
+                "title": "Leader",
+                "description": "Any warrior within 6\" of the Questing Knight may use his Leadership characteristic when taking Leadership tests."
+              }
+          ]
+       },
+       "equipment": {
+          "weapon": [
+             {
+                "name": "Sword",
+                "range": "Close Combat",
+                "strength": "As User",
+                "rule": [
+                  {
+                      "title": "Parry",
+                      "description": "Swords offer an excellent balance of defence and offence. A model armed with a sword may parry blows. When his opponent rolls to hit, the model armed with a sword may roll a D6. If the score is greater than the highest to hit score of his opponent, the model has parried the blow, and that attack is discarded. A model may not parry attacks made with double or more its own Strength - they are simply too powerful to be stopped."
+                  }
+                ]
+             },
+             {
+                "name": "Axe",
+                "range": "Close Combat",
+                "strength": "As User",
+                "rule": [
+                  {
+                      "title": "Cutting edge",
+                      "description": "An axe has an extra save modifier of -1, so a model with Strength 4 using an axe has a -2 save modifier when he hits an opponent in hand-to-hand combat."
+                  }
+                ]
+             }
+          ],
+          "armour": [
+             {
+                "name": "Helmet",
+                "rule": [
+                  {
+                      "title": "Avoid stun",
+                      "description": "A model that is equipped with a helmet has a special 4+ save on a D6 against being stunned. If the save is made, treat the stunned result as knocked down instead. This save is not modified by the opponent's Strength."
+                  }
+                ]
+             },
+             {
+                "name": "Heavy Armor",
+                "rule": [
+                  {
+                      "title": "Save",
+                      "description": "A warrior that is wearing Heavy armour has a basic D6 saving throw of 5+.",
+                      "value": "2"
+                  }
+                ]
+             },
+             {
+                "name": "Shield",
+                "rule": [
+                  {
+                      "title": "Save",
+                      "description": "A model with a shield has a +1 to their armour save.",
+                      "value": "1"
+                  }
+                ]
+             }
+          ]
+       }
+    },
+    {
+       "name": "Sir Ector",
+       "title": "Knight Errant",
+       "stats": {
+          "M": "3\"",
+          "WS": "3",
+          "BS": "3",
+          "S": "3",
+          "T": "3",
+          "W": "1",
+          "I": "3",
+          "A": "2",
+          "Ld": "7",
+          "Sv": "5+"
+       },
+       "special_rules": {
+          "rule": [
+              {
+                "title": "Knights Virtue",
+                "description": "A Questing Knight is a chivalrous warrior who is superior to ordinary warriors. He will never panic and break from combat and so does not have to pass a Leadership test for being all alone."
+              },
+              {
+                "title": "Frenzy",
+                "description": "Must always charge if there are any enemy models within charge range. Attack with double attack charactaristic. Once in charge range immune to all psychology. If knocked down or stuff, they are no longer frenzied and fight normal for the rest of the battle."
+              }
+          ]
+       },
+       "equipment": {
+          "weapon": [
+             {
+                "name": "Axe",
+                "range": "Close Combat",
+                "strength": "As User",
+                "rule": [
+                  {
+                      "title": "Cutting edge",
+                      "description": "An axe has an extra save modifier of -1, so a model with Strength 4 using an axe has a -2 save modifier when he hits an opponent in hand-to-hand combat."
+                  }
+                ]
+             }
+          ],
+          "armour": [
+            {
+               "name": "Helmet",
+               "rule": [
+                 {
+                     "title": "Avoid stun",
+                     "description": "A model that is equipped with a helmet has a special 4+ save on a D6 against being stunned. If the save is made, treat the stunned result as knocked down instead. This save is not modified by the opponent's Strength."
+                 }
+               ]
+            },
+            {
+               "name": "Light Armor",
+               "rule": [
+                 {
+                     "title": "Save",
+                     "description": "A warrior that is wearing Light armour has a basic D6 saving throw of 6+.",
+                     "value": "1"
+                 }
+               ]
+            },
+             {
+               "name": "Shield",
+               "rule": [
+                 {
+                     "title": "Save",
+                     "description": "A model with a shield has a +1 to their armour save.",
+                     "value": "1"
+                 }
+               ]
+            }
+          ],
+          "misc": [
+            {
+                "name": "rope & hook",
+                "description": "A warrior using a rope & hook will find it much easier to move amongst the ruins of Mordheim.\nA warrior equipped with a rope & hook may re-roll failed Initiative tests when climbing up and down."   
+            }
+        ]
+       }
+    }
+  ]
+
+}

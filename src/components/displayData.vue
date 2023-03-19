@@ -3,156 +3,82 @@
     <header class="text-center">
       <h1>Brettonians</h1>
     </header>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div id="accordion" v-if="warriors">
-              <div v-for="(warrior, index) in warriors" :key="index +1" class="card mb-3">
-                <div class="card-header bg-transparent text-center" :id="warrior.name.toLowerCase().split(' ').join('')">
-                  <div class="mb-0 align-items-center">
-                    <button class="text-white bg-transparent border-0" data-bs-toggle="collapse" :data-bs-target="'#collapse' + index" aria-expanded="false" :aria-controls="'accordion' + index">
-                      <h2 class="mb-0">{{ warrior.name }}</h2>
-                      <h4 class="mb-0">{{ warrior.title }}</h4>
-                    </button>
-                  </div>
+    <v-expansion-panels variant="popout" class="my-4">
+      <v-expansion-panel v-for="(warrior, index) in warriors" :key="index +1">
+        <v-expansion-panel-title class="text-center d-block">
+          <h2 class="mb-0">{{ warrior.name }}</h2><br>
+          <h4 class="mb-0">{{ warrior.title }}</h4>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-container>
+            <v-row class="text-center border-b w-100 mx-auto">
+                    <v-col class="border-e pa-0">M</v-col>
+                    <v-col class="border-e pa-0">WS</v-col>
+                    <v-col class="border-e pa-0">BS</v-col>
+                    <v-col class="border-e pa-0">S</v-col>
+                    <v-col class="border-e pa-0">T</v-col>
+                    <v-col class="border-e pa-0">W</v-col>
+                    <v-col class="border-e pa-0">I</v-col>
+                    <v-col class="border-e pa-0">A</v-col>
+                    <v-col class="border-e pa-0">Ld</v-col>
+                    <v-col class="pa-0">Sv</v-col>
+                  </v-row>
+                  <v-row class="text-center w-100 mx-auto">
+                    <v-col class="border-e pa-0">{{ warrior.stats.M[0] }}</v-col>
+                    <v-col class="border-e pa-0">{{ warrior.stats.WS[0] }}</v-col>
+                    <v-col class="border-e pa-0">{{ warrior.stats.BS[0] }}</v-col>
+                    <v-col class="border-e pa-0">{{ warrior.stats.S[0] }}</v-col>
+                    <v-col class="border-e pa-0">{{ warrior.stats.T[0] }}</v-col>
+                    <v-col class="border-e pa-0">{{ warrior.stats.W[0] }}</v-col>
+                    <v-col class="border-e pa-0">{{ warrior.stats.I[0] }}</v-col>
+                    <v-col class="border-e pa-0">{{ warrior.stats.A[0] }}</v-col>
+                    <v-col class="border-e pa-0">{{ warrior.stats.Ld[0] }}</v-col>
+                    <v-col class="pa-0">{{ warrior.stats.Sv[0] }}</v-col>
+                </v-row>
+          </v-container>
+          <v-continer>
+            <v-row v-if="!!warrior.special_rules">
+              <v-col class="px-3">
+                <h4 class="text-uppercase">Special Rules</h4>
+                <p v-for="(rule, index) in warrior.special_rules.rule" :key="index">
+                  <strong>{{ rule.title }}:</strong> {{ rule.description }}
+                </p>
+              </v-col>
+            </v-row>
+            <v-row v-if="!!warrior.equipment">
+              <v-col class="px-3">
+                <h4 class="text-uppercase">Equipment</h4>
+                <div v-if="!!warrior.equipment.weapon">
+                  <v-btn v-for="(weapon, index) in warrior.equipment.weapon" :key="index + 1" class="mb-3 me-3">
+                    {{ weapon.name }}
+                    <v-tooltip activator="parent" location="top">
+                      {{ weapon.name }} | {{ weapon.range }} | {{ weapon.strength }}<br />
+                      <strong>{{ weapon.rule[0].title }}:</strong> {{ weapon.rule[0].description }}
+                    </v-tooltip>
+                  </v-btn>
                 </div>
-                <div :id="'collapse' + index" class="collapse" :aria-labelledby="warrior.name.toLowerCase().split(' ').join('')" data-bs-parent="#accordion">
-                  <div class="card-body border px-1">
-                    <div class="container mb-4 font-size-20">
-                      <div class="row border-bottom text-center w-100 mx-auto">
-                        <div class="col border-right">
-                          <p>M</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>WS</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>BS</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>S</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>T</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>W</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>I</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>A</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>Ld</p>
-                        </div>
-                        <div class="col">
-                          <p>Sv</p>
-                        </div>
-                      </div>
-                      <div class="row text-center w-100 mx-auto">
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.M[0] }}"</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.WS[0] }}</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.BS[0] }}</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.S[0] }}</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.T[0] }}</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.W[0] }}</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.I[0] }}</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.A[0] }}</p>
-                        </div>
-                        <div class="col border-right">
-                          <p>{{ warrior.stats.Ld[0] }}</p>
-                        </div>
-                        <div class="col">
-                          <p>{{ warrior.stats.Sv[0] }}<span v-if="!!warrior.stats.Sv[0]">+</span><span v-else>-</span></p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="container">
-                      <div v-if="!!warrior.special_rules" class="row">
-                        <div class="col px-3">
-                          <h4 class="text-uppercase">Special Rules</h4>
-                          <p v-for="(rule, index) in warrior.special_rules.rule" :key="index">
-                            <strong>{{ rule.title }}:</strong> {{ rule.description }}
-                          </p>
-                        </div>
-                      </div>                   
-                      <div class="row">
-                        <div class="col px-3">
-                          <h4 class="text-uppercase">Equipment</h4>
-                          <div v-if="warrior.equipment.weapon">
-                            <p v-for="(weapon, index) in warrior.equipment.weapon" :key="index + 1">
-                              {{ weapon.name }} | {{ weapon.range }} | {{ weapon.strength }}<br />
-                              <strong>{{ weapon.rule[0].title }}:</strong> {{ weapon.rule[0].description }}
-                              <button tabindex="0" class="btn btn-secondary mr-1 mb-2" type="button" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="focus" data-bs-placement="top" data-bs-content="`${weapon.name} | ${weapon.range} | ${weapon.strength}<br /><strong>${weapon.rule[0].title}:</strong> ${weapon.rule[0].description}`">
-                                {{ weapon.name }}
-                              </button>
-
-                            </p>
-                         
-                          </div>
-                          <div v-if="warrior.equipment.armour">
-                            <p v-for="(armour, index) in warrior.equipment.armour" :key="index + 1">
-                              {{ armour.name }}<br />
-                              <strong>{{ armour.rule[0].title }}:</strong> {{ armour.rule[0].description }}
-                            </p>
-                          </div>
-                          <div v-if="warrior.equipment.misc">
-                            <p v-for="(misc, index) in warrior.equipment.misc" :key="index + 1">
-                              {{ misc.name }}<br />
-                              {{ misc.description }}
-                            </p>
-                          </div>
-
-                          <span tabindex="0" class="btn btn-secondary mr-1 mb-2" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="top" data-title="" data-content="
-                            <h4 class='text-center font-size-18'>Sword | Close Combat | As User</h4>
-                            <p class='pb-1'><strong>Parry:</strong>Swords offer an excellent balance of defence and offence. A model armed with a sword may parry blows. When his opponent rolls to hit, the model armed with a sword may roll a D6. If the score is greater than the highest to hit score of his opponent, the model has parried the blow, and that attack is discarded. A model may not parry attacks made with double or more its own Strength – they are simply too powerful to be stopped.</p>
-                            ">Sword
-                          </span>
-                          <span tabindex="0" class="btn btn-secondary mr-1 mb-2" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="top" data-title="" data-content="
-                            <p class='pb-1'><strong>Avoid stun:</strong>A model that is equipped with a helmet has a special 4+ save on a D6 against being stunned. If the save is made, treat the stunned result as knocked down instead. This save is not modified by the opponent’s Strength.  </p>
-                            ">Helmet
-                          </span>
-                          <span tabindex="0" class="btn btn-secondary mr-1 mb-2" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="top" data-title="" data-content="
-                            <p class='pb-1'><strong>Save:</strong>A warrior that is wearing heavy armour has a basic D6 saving throw of 5+.</p>
-                            <p class='pb-1'><strong>Movement:</strong>A warrior that is armed with both heavy armour and a shield suffers a -1 Movement penalty.</p>
-                            ">Heavy armour
-                          </span>
-                          <span tabindex="0" class="btn btn-secondary mr-1 mb-2" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="top" data-title="" data-content="
-                            <p class='pb-1'><strong>Save:</strong>A model with a shield has a +1 to their armour save.</p>
-                            ">Shield
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
+                <div v-if="!!warrior.equipment.armour">
+                  <v-btn v-for="(armour, index) in warrior.equipment.armour" :key="index + 1" class="mb-3 me-3">
+                    {{ armour.name }}
+                    <v-tooltip activator="parent" location="top">
+                      <strong>{{ armour.rule[0].title }}:</strong> {{ armour.rule[0].description }}
+                    </v-tooltip>
+                  </v-btn>
                 </div>
-              </div>
-            </div>
-            <p v-else>No data available</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <button @click="clearData">Clear Data</button>
+                <div v-if="!!warrior.equipment.misc">
+                  <v-btn v-for="(misc, index) in warrior.equipment.misc" :key="index + 1" class="mb-3 me-3">
+                    {{ misc.name }}
+                    <v-tooltip activator="parent" location="top">
+                      {{ misc.description }}
+                    </v-tooltip>
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
+          </v-continer>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
 
