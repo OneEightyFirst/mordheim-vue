@@ -101,18 +101,22 @@
 
 <script>
 export default {
+  props: {
+    localStorageKey: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
     warband() {
-      const data = JSON.parse(localStorage.getItem('warband'));
+      const data = JSON.parse(localStorage.getItem(this.localStorageKey));
       return data;
     },
   },
-
   methods: {
     clearData() {
-      localStorage.removeItem('warband');
+      localStorage.removeItem(this.localStorageKey);
     },
   }
 }
-
 </script>

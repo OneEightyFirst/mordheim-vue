@@ -11,9 +11,10 @@ const router = createRouter({
       component: uploadComponent,
     },
     {
-      path: '/display-data',
-      name: 'display',
+      path: '/display-data/:localStorageKey',
+      name: 'display-data',
       component: displayData,
+      props: true
     },
   ],
 });

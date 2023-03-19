@@ -17,18 +17,20 @@
     </v-menu>
   </v-toolbar>
   <section>
-  <v-container>
-    <v-row v-for="(warband, index) in warbands" :key="index">
-      <v-col>
+    <v-container>
+  <v-row v-for="(warband, index) in warbands" :key="index">
+    <v-col>
+      <router-link :to="{ name: 'display-data', params: { localStorageKey: `warband_${index}` } }">
         <v-card>
           <template v-slot:text>
             <h4>Warband uploaded:</h4>
             <h1>{{ warband.warbandName }}</h1>
           </template>
         </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+      </router-link>
+    </v-col>
+  </v-row>
+</v-container>
   <v-container>
     <v-row>
       <v-col>

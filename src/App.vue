@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view :localStorageKey="'my_key'"></router-view>
   </div>
 </template>
 
