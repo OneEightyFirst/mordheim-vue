@@ -1,0 +1,75 @@
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+@import url(https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap);.col,.container {
+  padding: 0 var(--ifm-spacing-horizontal);
+  width: 100%
+}
+@font-face {
+  font-family: CalsonAntique;
+  src: url(@/assets/fonts/CaslonAntique.woff2) format("woff")
+}
+
+@font-face {
+  font-family: Mordheim;
+  src: url(@/assets/fonts/schoensperger.woff2) format("woff")
+}
+
+body {
+    padding: 3rem 1.5rem;
+    color:#fff;
+    background-color: #333;
+    .card {
+      background-color: #333;
+      color:#FFF;
+      border:1px solid #DEDEDE !important;
+    }
+  }
+
+
+// Red
+$red:     red;
+$green: 		green;
+$teal: 		#00586d;
+$theme-colors: (
+    'red': 							$red,
+    'green': 						$green,
+    'teal': 						$teal,
+    'primary': 						$red,
+    // 'secondary': 					$blue
+);
+@each $color, $value in $theme-colors {
+  .text-#{$color} {
+      color: $value;
+  }
+}
+$font-sizes: (12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48);
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+        @each $size in $font-sizes {
+            .font-size#{$infix}-#{$size} {
+                font-size: $size + px !important;
+            }
+        }
+    }
+}
+
+
+
+h1, h2, h3 {
+  font-family: Mordheim,serif;
+  letter-spacing: -.02em;
+}
+h4, .popover h3 {
+  font-family: CalsonAntique, serif;
+}
+body {
+  font-family: EB Garamond,sans-serif;
+  font-size: 18px
+}
+p {
+  margin:0;
+  line-height: 1.1em;
+}
