@@ -1,9 +1,9 @@
 {   
-"warbandName": "Brettonians",
+"warbandName": "Witch Hunters",
  "warriors": [
     {
-       "name": "Sir Pellinore",
-       "title": "Questing knight",
+       "name": "Thing",
+       "title": "Witch Hunter",
        "stats": {
           "M": "3",
           "WS": "5",

@@ -1,16 +1,33 @@
 <template>
   <div>
+    <v-toolbar density="comfortable" title="Mordheim">
+      <v-menu transition="scale-transition">
+      <template v-slot:activator="{ props }">
+        <v-btn v-bind="props" icon>
+          <v-icon icon="fa:fas fa-list"></v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item>
+          <v-list-item-title>
+            <router-link to="/">Edit</router-link>
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+
+    </v-toolbar>
     <header class="text-center">
-      <h1>Brettonians</h1>
+      <h1>{{ warband.warbandName }}</h1>
     </header>
     <v-expansion-panels variant="popout" class="my-4">
-      <v-expansion-panel v-for="(warrior, index) in warriors" :key="index +1">
+      <v-expansion-panel v-for="(warrior, index) in warband.warriors" :key="index +1">
         <v-expansion-panel-title class="text-center d-block">
           <h2 class="mb-0">{{ warrior.name }}</h2><br>
           <h4 class="mb-0">{{ warrior.title }}</h4>
         </v-expansion-panel-title>
         <v-expansion-panel-text>
-          <v-container>
+          <v-container class="px-0 mb-3">
             <v-row class="text-center border-b w-100 mx-auto">
                     <v-col class="border-e pa-0">M</v-col>
                     <v-col class="border-e pa-0">WS</v-col>
@@ -49,7 +66,7 @@
               <v-col class="px-3">
                 <h4 class="text-uppercase">Equipment</h4>
                 <div v-if="!!warrior.equipment.weapon">
-                  <v-btn v-for="(weapon, index) in warrior.equipment.weapon" :key="index + 1" class="mb-3 me-3">
+                  <v-btn v-for="(weapon, index) in warrior.equipment.weapon" :key="index + 1" class="mb-3 me-3" variant="outlined" color="primary">
                     {{ weapon.name }}
                     <v-tooltip activator="parent" location="top">
                       {{ weapon.name }} | {{ weapon.range }} | {{ weapon.strength }}<br />
@@ -85,15 +102,15 @@
 <script>
 export default {
   computed: {
-    warriors() {
-      const data = JSON.parse(localStorage.getItem('myData'));
-      return data.warriors;
+    warband() {
+      const data = JSON.parse(localStorage.getItem('warband'));
+      return data;
     },
   },
 
   methods: {
     clearData() {
-      localStorage.removeItem('myData');
+      localStorage.removeItem('warband');
     },
   }
 }
